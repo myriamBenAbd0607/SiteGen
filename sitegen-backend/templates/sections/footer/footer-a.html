@@ -1,0 +1,91 @@
+<!-- ============================================================
+     FOOTER A - 4 colonnes complet
+     Idéal pour : Business, SaaS, professionnel
+     ============================================================ -->
+
+<footer class="footer-a" style="
+  background: var(--dark);
+  padding: 60px 24px 32px;
+  color: rgba(255,255,255,0.5);
+">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <!-- Grille 4 colonnes -->
+    <div style="
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    ">
+      <!-- Brand -->
+      <div>
+        <div style="
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: white;
+          margin-bottom: 12px;
+        ">
+          {{NOM}}
+        </div>
+        <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.4); max-width: 300px;">
+          {{FOOTER_TAGLINE}}
+        </p>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h4 style="color: white; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">
+          Services
+        </h4>
+        {{FOOTER_SERVICES_LIST}}
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 style="color: white; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">
+          Contact
+        </h4>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+          <span>📞 {{TELEPHONE}}</span>
+          <span>✉️ {{EMAIL}}</span>
+          <span>📍 {{ADRESSE}}</span>
+        </div>
+      </div>
+
+      <!-- Horaires -->
+      <div>
+        <h4 style="color: white; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">
+          Horaires
+        </h4>
+        <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem;">
+          {{FOOTER_HOURS}}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bas -->
+    <div style="
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 32px; font-size: 0.8rem; color: rgba(255,255,255,0.2);
+      flex-wrap: wrap; gap: 16px;
+    ">
+      <span>© {{FOOTER_YEAR}} {{NOM}} — {{FOOTER_RIGHTS}}</span>
+      <div style="display: flex; gap: 24px;">
+        <a href="#" style="color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.3s;">Mentions légales</a>
+        <a href="#" style="color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.3s;">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .footer-a a:hover { color: var(--accent) !important; }
+    @media (max-width: 960px) {
+      .footer-a > div > div:first-child { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .footer-a > div > div:first-child { grid-template-columns: 1fr; }
+      .footer-a > div:last-child { flex-direction: column; text-align: center; }
+    }
+  </style>
+</footer>

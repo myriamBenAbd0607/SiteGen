@@ -1,0 +1,108 @@
+<!-- ============================================================
+     SERVICES A - Grille 3 colonnes avec icônes SVG
+     Idéal pour : Architecture, luxe, créatif, restaurants
+     ============================================================ -->
+
+<section class="services-a" style="
+  padding: 100px 24px;
+  background: var(--light-bg);
+">
+  <div class="container" style="max-width: 1200px; margin: 0 auto;">
+    <!-- En-tête -->
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 60px;">
+      <span style="
+        display: block;
+        color: var(--accent);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 600;
+        margin-bottom: 12px;
+      ">
+        {{SERVICES_EYEBROW}}
+      </span>
+      <h2 style="
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: var(--dark);
+        line-height: 1.1;
+      ">
+        {{SERVICES_TITLE}}
+      </h2>
+    </div>
+
+    <!-- Grille -->
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    ">
+      {{SERVICES_HTML}}
+    </div>
+  </div>
+
+  <style>
+    .services-a .service-card {
+      background: white;
+      padding: 32px 28px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: all 0.4s var(--ease);
+      position: relative;
+    }
+    .services-a .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    }
+    .services-a .service-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .services-a .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: all 0.4s var(--ease);
+    }
+    .services-a .service-card:hover .service-icon {
+      background: var(--accent);
+      transform: rotate(-8deg) scale(1.05);
+    }
+    .services-a .service-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--accent);
+      transition: stroke 0.4s var(--ease);
+    }
+    .services-a .service-card:hover .service-icon svg {
+      stroke: var(--dark);
+    }
+    .services-a .service-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .services-a .service-card p {
+      font-size: 0.9rem;
+      color: var(--gray-text);
+      line-height: 1.7;
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      .services-a > div > div:last-child { grid-template-columns: 1fr; }
+    }
+  </style>
+</section>

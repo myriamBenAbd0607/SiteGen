@@ -1,0 +1,119 @@
+<!-- ============================================================
+     CTA B - Fond accent / Formulaire inline / Contact direct
+     Idéal pour : Conversion rapide, services, professionnel
+     ============================================================ -->
+
+<section class="cta-b" style="
+  padding: 80px 24px;
+  background: var(--accent);
+">
+  <div class="container" style="
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  ">
+    <!-- Texte -->
+    <div>
+      <span style="
+        display: block;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 600;
+        color: var(--dark);
+        opacity: 0.5;
+        margin-bottom: 8px;
+      ">
+        {{CTA_LABEL}}
+      </span>
+      <h2 style="
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        font-weight: 700;
+        color: var(--dark);
+        line-height: 1.1;
+        letter-spacing: -1px;
+        margin-bottom: 12px;
+      ">
+        {{CTA_TITLE}}
+      </h2>
+      <p style="
+        font-size: 1rem;
+        color: rgba(0,0,0,0.5);
+        line-height: 1.7;
+        max-width: 400px;
+      ">
+        {{CTA_SUBTITLE}}
+      </p>
+    </div>
+
+    <!-- Formulaire inline -->
+    <form style="
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: white;
+      padding: 32px 28px;
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    ">
+      <input type="text" placeholder="Votre nom" required style="
+        padding: 14px 18px;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.3s;
+      " onfocus="this.style.borderColor='var(--dark)'" onblur="this.style.borderColor='rgba(0,0,0,0.06)'">
+
+      <input type="email" placeholder="Votre email" required style="
+        padding: 14px 18px;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.3s;
+      " onfocus="this.style.borderColor='var(--dark)'" onblur="this.style.borderColor='rgba(0,0,0,0.06)'">
+
+      <textarea placeholder="Votre message" rows="2" style="
+        padding: 14px 18px;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        outline: none;
+        resize: vertical;
+        transition: border-color 0.3s;
+        font-family: 'Inter', sans-serif;
+      " onfocus="this.style.borderColor='var(--dark)'" onblur="this.style.borderColor='rgba(0,0,0,0.06)'"></textarea>
+
+      <button type="submit" style="
+        padding: 14px;
+        background: var(--dark);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s var(--ease);
+      ">
+        {{CTA_BTN}} →
+      </button>
+    </form>
+  </div>
+
+  <style>
+    .cta-b button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    @media (max-width: 768px) {
+      .cta-b > div { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .cta-b > div > div:last-child { padding: 24px 20px; }
+      .cta-b > div > div:first-child p { margin: 0 auto; }
+    }
+  </style>
+</section>

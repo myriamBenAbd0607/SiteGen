@@ -1,0 +1,98 @@
+<!-- ============================================================
+     CTA A - Fond sombre / Titre géant / Mot en filigrane / Bold
+     Idéal pour : Impact, marques premium, conversion forte
+     ============================================================ -->
+
+<section class="cta-a" style="
+  padding: 120px 24px;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+">
+
+  <!-- Mot en filigrane -->
+  <div style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(8rem, 25vw, 18rem);
+    font-weight: 900;
+    color: rgba(255,255,255,0.02);
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 8px;
+    user-select: none;
+    white-space: nowrap;
+    pointer-events: none;
+  ">
+    {{CTA_LABEL}}
+  </div>
+
+  <!-- Contenu -->
+  <div style="
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+  ">
+    <span style="
+      display: inline-block;
+      padding: 6px 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 24px;
+    ">
+      {{CTA_LABEL}}
+    </span>
+
+    <h2 style="
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    ">
+      {{CTA_TITLE}}
+    </h2>
+
+    <p style="
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 32px;
+    ">
+      {{CTA_SUBTITLE}}
+    </p>
+
+    <a href="#contact" style="
+      display: inline-block;
+      padding: 18px 56px;
+      background: var(--accent);
+      color: var(--dark);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s var(--ease);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    ">
+      {{CTA_BTN}} →
+    </a>
+  </div>
+
+  <style>
+    .cta-a a:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+    }
+  </style>
+</section>

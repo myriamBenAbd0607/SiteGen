@@ -1,0 +1,126 @@
+<!-- ============================================================
+     ABOUT A - Split image gauche / Texte droite avec badge flottant
+     Idéal pour : Architecture, luxe, immobilier, créatif
+     ============================================================ -->
+
+<section class="about-a" style="
+  padding: 100px 24px;
+  background: var(--light-bg);
+">
+  <div class="container" style="
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  ">
+    <!-- Image -->
+    <div class="about-a__image" style="
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.08);
+    ">
+      <img src="{{ABOUT_IMAGE_URL}}" alt="{{NOM}}" loading="lazy" style="
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      ">
+      
+      <!-- Badge flottant -->
+      <div class="about-a__badge" style="
+        position: absolute;
+        bottom: 32px;
+        left: 32px;
+        background: var(--accent);
+        color: var(--dark);
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-family: 'Space Grotesk', sans-serif;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      ">
+        <span class="num" style="font-size: 2rem; font-weight: 700; display: block; line-height: 1;">
+          {{ABOUT_BADGE_NUM}}
+        </span>
+        <span class="txt" style="font-size: 0.8rem; font-weight: 600;">
+          {{ABOUT_BADGE_LABEL}}
+        </span>
+      </div>
+    </div>
+
+    <!-- Texte -->
+    <div class="about-a__text" style="
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    ">
+      <span class="section-eyebrow">{{ABOUT_EYEBROW}}</span>
+      <h2 style="
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 700;
+        color: var(--dark);
+        line-height: 1.1;
+        letter-spacing: -1px;
+      ">
+        {{ABOUT_TITLE}}
+      </h2>
+
+      {{ABOUT_PARAGRAPHS_HTML}}
+
+      <ul class="about-a__list" style="
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 8px 0 24px;
+      ">
+        {{ABOUT_HIGHLIGHTS_HTML}}
+      </ul>
+
+      <a href="#contact" class="btn-accent-outline" style="
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        padding: 14px 32px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s var(--ease);
+        align-self: flex-start;
+      ">
+        {{ABOUT_CTA}} →
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .about-a__list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gray);
+      font-size: 0.92rem;
+    }
+    .about-a__list li::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .btn-accent-outline:hover {
+      background: var(--accent);
+      color: var(--dark);
+      transform: translateY(-2px);
+    }
+    @media (max-width: 960px) {
+      .about-a > div { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</section>

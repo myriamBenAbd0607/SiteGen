@@ -1,0 +1,175 @@
+<!-- ============================================================
+     HERO A - Plein écran / Image de fond / Texte bas-gauche
+     Idéal pour : Architecture, luxe, immobilier, créatif
+     ============================================================ -->
+
+<section class="hero-a" style="
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: var(--dark);
+  overflow: hidden;
+">
+
+  <!-- Image de fond -->
+  <div style="
+    position: absolute;
+    inset: 0;
+    background-image: url('{{HERO_IMAGE_URL}}');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+    animation: hero-zoom 20s ease-in-out infinite alternate;
+  ">
+    <div style="
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.8) 0%,
+        rgba(0,0,0,0.3) 60%,
+        transparent 100%
+      );
+    "></div>
+  </div>
+
+  <!-- Contenu -->
+  <div class="container" style="
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  ">
+    <div style="
+      max-width: 640px;
+      padding: 40px 0;
+    ">
+      <!-- Badge -->
+      <span style="
+        display: inline-block;
+        padding: 6px 20px;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 50px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--accent);
+        font-weight: 600;
+        margin-bottom: 24px;
+        backdrop-filter: blur(8px);
+        background: rgba(255,255,255,0.03);
+      ">
+        {{HERO_BADGE}}
+      </span>
+
+      <!-- Titre -->
+      <h1 style="
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2.8rem, 7vw, 4.8rem);
+        font-weight: 800;
+        color: white;
+        line-height: 1.05;
+        margin-bottom: 20px;
+        letter-spacing: -2px;
+      ">
+        {{HERO_TITLE}}
+      </h1>
+
+      <!-- Sous-titre -->
+      <p style="
+        font-size: clamp(1rem, 1.4vw, 1.2rem);
+        color: rgba(255,255,255,0.6);
+        line-height: 1.8;
+        margin-bottom: 32px;
+      ">
+        {{HERO_SUBTITLE}}
+      </p>
+
+      <!-- CTA Group -->
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="#contact" style="
+          padding: 14px 40px;
+          background: var(--accent);
+          color: var(--dark);
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 0.95rem;
+          transition: all 0.3s var(--ease);
+        ">
+          {{HERO_CTA_PRIMARY}} →
+        </a>
+        <a href="#services" style="
+          padding: 14px 32px;
+          border: 1px solid rgba(255,255,255,0.2);
+          color: white;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.95rem;
+          transition: all 0.3s var(--ease);
+          backdrop-filter: blur(8px);
+          background: rgba(255,255,255,0.03);
+        ">
+          {{HERO_CTA_SECONDARY}}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div style="
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  ">
+    <span>Défiler</span>
+    <span style="
+      width: 20px;
+      height: 32px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+    ">
+      <span style="
+        width: 4px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 4px;
+        animation: scroll-anim 2s ease-in-out infinite;
+      "></span>
+    </span>
+  </div>
+
+  <style>
+    @keyframes hero-zoom {
+      0% { transform: scale(1.05); }
+      100% { transform: scale(1.2); }
+    }
+    @keyframes scroll-anim {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(6px); opacity: 0.3; }
+    }
+    .hero-a a:first-child:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+    .hero-a a:last-child:hover {
+      background: rgba(255,255,255,0.08);
+    }
+  </style>
+</section>

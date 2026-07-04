@@ -1,0 +1,49 @@
+<!-- ============================================================
+     FOOTER B - Minimal centré
+     Idéal pour : Luxe, créatif, portfolios, marques
+     ============================================================ -->
+
+<footer class="footer-b" style="
+  background: var(--dark);
+  padding: 60px 24px 32px;
+  text-align: center;
+  color: rgba(255,255,255,0.4);
+">
+  <div style="max-width: 600px; margin: 0 auto;">
+    <!-- Logo / Brand -->
+    <div style="
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    ">
+      {{NOM}}
+    </div>
+
+    <!-- Tagline -->
+    <p style="font-size: 0.95rem; color: rgba(255,255,255,0.3); margin-bottom: 24px;">
+      {{FOOTER_TAGLINE}}
+    </p>
+
+    <!-- Liens sociaux -->
+    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 32px;">
+      {{FOOTER_SOCIAL_LINKS}}
+    </div>
+
+    <!-- Copyright -->
+    <div style="font-size: 0.8rem; color: rgba(255,255,255,0.15);">
+      © {{FOOTER_YEAR}} {{NOM}} — {{FOOTER_RIGHTS}}
+      <span style="display: block; margin-top: 4px; font-size: 0.7rem;">
+        <a href="#" style="color: rgba(255,255,255,0.15); text-decoration: none; margin: 0 12px;">Mentions légales</a>
+        <a href="#" style="color: rgba(255,255,255,0.15); text-decoration: none; margin: 0 12px;">Confidentialité</a>
+      </span>
+    </div>
+  </div>
+
+  <style>
+    .footer-b a:not([style*="color"]) { color: rgba(255,255,255,0.2); transition: color 0.3s; }
+    .footer-b a:hover { color: var(--accent) !important; }
+  </style>
+</footer>

@@ -1,0 +1,305 @@
+<!-- ============================================================
+     PORTFOLIO B — Masonry Premium avec filtres
+     Style Behance / Dribbble — hover effects soignés
+     ============================================================ -->
+
+<section class="portfolio-b" style="padding: 120px 24px; background: var(--light-bg); overflow: hidden;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+
+    <!-- En-tête -->
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 48px;">
+      <span style="
+        display: block;
+        color: var(--accent);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 600;
+        margin-bottom: 12px;
+      ">{{PORTFOLIO_EYEBROW}}</span>
+      <h2 style="
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: var(--dark);
+        line-height: 1.1;
+        letter-spacing: -1.5px;
+        margin: 0 0 16px;
+      ">{{PORTFOLIO_TITLE}}</h2>
+    
+    </div>
+
+    <!-- Filtres -->
+    <div class="pb-filters">
+      <button class="pb-filter active" onclick="filterPortfolio(this, 'all')">Tout voir</button>
+      <button class="pb-filter" onclick="filterPortfolio(this, 'featured')">À la une</button>
+      <button class="pb-filter" onclick="filterPortfolio(this, 'recent')">Récents</button>
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="pb-masonry">
+      {{PORTFOLIO_HTML}}
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align: center; margin-top: 56px;">
+      <a href="#contact" style="
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        background: var(--dark);
+        color: white;
+        border-radius: 100px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s;
+      " onmouseover="this.style.background='var(--accent)'"
+         onmouseout="this.style.background='var(--dark)'">
+        Discutons de votre projet
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <style>
+    /* ── Filtres ── */
+    .pb-filters {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .pb-filter {
+      padding: 8px 22px;
+      border-radius: 100px;
+      border: 1.5px solid rgba(0,0,0,0.1);
+      background: white;
+      color: var(--gray-text);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: inherit;
+    }
+    .pb-filter:hover,
+    .pb-filter.active {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: white;
+    }
+
+    /* ── Masonry Grid ── */
+    .pb-masonry {
+      columns: 3;
+      column-gap: 20px;
+    }
+
+    /* ── Carte ── */
+    .pb-card {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      display: block;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .pb-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.12);
+    }
+
+    /* Image */
+    .pb-card__img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .pb-card:hover .pb-card__img {
+      transform: scale(1.04);
+    }
+
+    /* Overlay hover */
+    .pb-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.82) 0%,
+        rgba(0,0,0,0.4) 50%,
+        rgba(0,0,0,0.05) 100%
+      );
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+    }
+    .pb-card:hover .pb-card__overlay {
+      opacity: 1;
+    }
+
+    /* Icône zoom */
+    .pb-card__zoom {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: all 0.3s 0.05s;
+      color: var(--dark);
+      font-size: 16px;
+    }
+    .pb-card:hover .pb-card__zoom {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Contenu overlay */
+    .pb-card__tag {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--accent);
+      color: var(--dark);
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      width: fit-content;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.35s 0.1s;
+    }
+    .pb-card:hover .pb-card__tag {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .pb-card__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 4px;
+      line-height: 1.25;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.35s 0.15s;
+    }
+    .pb-card:hover .pb-card__title {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .pb-card__sub {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      margin: 0;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.35s 0.2s;
+    }
+    .pb-card:hover .pb-card__sub {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Body visible (sous l'image) */
+    .pb-card__body {
+      padding: 20px 24px;
+      background: white;
+    }
+    .pb-card__body-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--dark);
+      margin: 0 0 4px;
+    }
+    .pb-card__body-sub {
+      font-size: 0.8rem;
+      color: var(--gray-text);
+      margin: 0;
+    }
+
+    /* Accent bar */
+    .pb-card__accent-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .pb-card:hover .pb-card__accent-bar {
+      transform: scaleX(1);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .pb-masonry { columns: 2; }
+    }
+    @media (max-width: 580px) {
+      .pb-masonry { columns: 1; }
+    }
+  </style>
+
+  <script>
+    function filterPortfolio(btn, category) {
+      // Update active button
+      document.querySelectorAll('.pb-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Animate cards
+      const cards = document.querySelectorAll('.pb-card');
+      cards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) scale(1)';
+        }, i * 60);
+      });
+    }
+
+    // Animation d'entrée initiale
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.pb-card');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }, i * 80);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(32px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.4s, border-color 0.3s';
+        obs.observe(card);
+      });
+    });
+  </script>
+</section>

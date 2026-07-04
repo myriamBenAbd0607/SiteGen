@@ -1,0 +1,165 @@
+<!-- ============================================================
+     HERO B - Split 50/50 / Texte à gauche / Image à droite
+     Idéal pour : Tech, SaaS, médical, consulting
+     ============================================================ -->
+
+<section class="hero-b" style="
+  min-height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--light-bg);
+  overflow: hidden;
+">
+
+  <!-- Partie gauche : Texte -->
+  <div style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 48px;
+    background: white;
+  ">
+    <!-- Badge -->
+    <span style="
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    ">
+      {{HERO_BADGE}}
+    </span>
+
+    <!-- Titre -->
+    <h1 style="
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.05;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+    ">
+      {{HERO_TITLE}}
+    </h1>
+
+    <!-- Sous-titre -->
+    <p style="
+      font-size: 1.05rem;
+      color: var(--gray-text);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 32px;
+    ">
+      {{HERO_SUBTITLE}}
+    </p>
+
+    <!-- Stats miniatures -->
+    <div style="
+      display: flex;
+      gap: 40px;
+      margin-bottom: 32px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    ">
+      <div>
+        <div style="
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: var(--accent);
+        ">
+          {{HERO_STAT_1_VAL}}
+        </div>
+        <div style="font-size: 0.75rem; color: var(--gray-text); text-transform: uppercase; letter-spacing: 1px;">
+          {{HERO_STAT_1_LBL}}
+        </div>
+      </div>
+      <div>
+        <div style="
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: var(--accent);
+        ">
+          {{HERO_STAT_2_VAL}}
+        </div>
+        <div style="font-size: 0.75rem; color: var(--gray-text); text-transform: uppercase; letter-spacing: 1px;">
+          {{HERO_STAT_2_LBL}}
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <a href="#contact" style="
+        padding: 14px 40px;
+        background: var(--accent);
+        color: var(--dark);
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: all 0.3s var(--ease);
+      ">
+        {{HERO_CTA_PRIMARY}}
+      </a>
+      <a href="#services" style="
+        padding: 14px 32px;
+        border: 1px solid rgba(0,0,0,0.08);
+        color: var(--dark);
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s var(--ease);
+      ">
+        {{HERO_CTA_SECONDARY}}
+      </a>
+    </div>
+  </div>
+
+  <!-- Partie droite : Image -->
+  <div style="
+    background-image: url('{{HERO_IMAGE_URL}}');
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+    position: relative;
+  ">
+    <!-- Badge flottant -->
+    <div style="
+      position: absolute;
+      bottom: 40px;
+      left: -30px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    ">
+      <span style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">★</span>
+      <span style="font-weight: 600; color: var(--dark);">{{HERO_RATING}}</span>
+      <span style="color: var(--gray-text); font-size: 0.85rem;">{{HERO_RATING_LABEL}}</span>
+    </div>
+  </div>
+
+  <style>
+    .hero-b a:first-child:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    }
+    .hero-b a:last-child:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    @media (max-width: 960px) {
+      .hero-b { grid-template-columns: 1fr; }
+      .hero-b > div:last-child { min-height: 300px; }
+      .hero-b > div:last-child > div { left: 20px; }
+    }
+  </style>
+</section>

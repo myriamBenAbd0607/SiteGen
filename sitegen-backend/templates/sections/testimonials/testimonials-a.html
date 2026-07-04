@@ -1,0 +1,94 @@
+<!-- ============================================================
+     TESTIMONIALS A - 3 cards / Fond clair / Avatars + étoiles
+     Idéal pour : Classique, professionnel, tous secteurs
+     ============================================================ -->
+
+<section class="testimonials-a" style="
+  padding: 100px 24px;
+  background: var(--light-bg);
+">
+  <div class="container" style="
+    max-width: 1200px;
+    margin: 0 auto;
+  ">
+    <!-- En-tête -->
+    <div style="
+      text-align: center;
+      max-width: 540px;
+      margin: 0 auto 60px;
+    ">
+      <span class="section-eyebrow">{{TESTIMONIALS_EYEBROW}}</span>
+      <h2 style="
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 700;
+        color: var(--dark);
+        line-height: 1.1;
+        letter-spacing: -1px;
+      ">
+        {{TESTIMONIALS_TITLE}}
+      </h2>
+    </div>
+
+    <!-- Grille 3 colonnes -->
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    ">
+      {{TESTIMONIALS_HTML}}
+    </div>
+  </div>
+
+  <style>
+    .testimonials-a .testi-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 28px;
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: all 0.4s var(--ease);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .testimonials-a .testi-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    }
+    .testimonials-a .testi-stars {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    .testimonials-a .testi-text {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .testimonials-a .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonials-a .testi-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--accent-light);
+    }
+    .testimonials-a .testi-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--dark);
+    }
+    .testimonials-a .testi-role {
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+    @media (max-width: 768px) {
+      .testimonials-a > div > div:last-child { grid-template-columns: 1fr; }
+    }
+  </style>
+</section>

@@ -1,0 +1,98 @@
+<!-- ============================================================
+     ABOUT B - Centré / Valeurs en cards / Minimaliste
+     Idéal pour : Business, services, B2B, professionnel
+     ============================================================ -->
+
+<section class="about-b" style="
+  padding: 100px 24px;
+  background: white;
+">
+  <div class="container" style="
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  ">
+    <!-- En-tête -->
+    <div style="max-width: 640px; margin: 0 auto 60px;">
+      <span class="section-eyebrow">{{ABOUT_EYEBROW}}</span>
+      <h2 style="
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 700;
+        color: var(--dark);
+        line-height: 1.1;
+        letter-spacing: -1px;
+        margin-bottom: 16px;
+      ">
+        {{ABOUT_TITLE}}
+      </h2>
+      {{ABOUT_PARAGRAPHS_HTML}}
+    </div>
+
+    <!-- Valeurs en cards -->
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    ">
+      {{ABOUT_HIGHLIGHTS_HTML}}
+    </div>
+
+    <a href="#contact" class="btn-primary" style="
+      display: inline-block;
+      margin-top: 48px;
+      background: var(--accent);
+      color: var(--dark);
+      padding: 14px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: all 0.3s var(--ease);
+    ">
+      {{ABOUT_CTA}} →
+    </a>
+  </div>
+
+  <style>
+    .about-b .about-highlight {
+      background: var(--light-bg);
+      border-radius: 16px;
+      padding: 32px 20px;
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: all 0.4s var(--ease);
+    }
+    .about-b .about-highlight:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+      border-color: var(--accent);
+    }
+    .about-b .about-highlight .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .about-b .about-highlight h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .about-b .about-highlight p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    }
+    @media (max-width: 768px) {
+      .about-b > div > div:nth-child(2) { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .about-b > div > div:nth-child(2) { grid-template-columns: 1fr; }
+    }
+  </style>
+</section>

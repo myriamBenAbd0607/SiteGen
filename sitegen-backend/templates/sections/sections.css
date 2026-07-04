@@ -1,0 +1,309 @@
+/* =====================================================
+   HERO A - Premium plein écran
+===================================================== */
+
+.hero-a {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: white;
+}
+
+.hero-a .hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-a .hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-a .hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.hero-a .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero-a .hero-title {
+  font-size: 5rem;
+  line-height: 1;
+  margin: 1rem 0;
+}
+
+.hero-a .hero-title em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.hero-a .hero-subtitle {
+  font-size: 1.25rem;
+  max-width: 600px;
+}
+
+.hero-a .hero-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* =====================================================
+   HERO B - Split Screen
+===================================================== */
+
+.hero-b {
+  padding: 100px 0;
+}
+
+.hero-b .hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 5rem;
+}
+
+.hero-b .hero-title {
+  font-size: 4rem;
+  line-height: 1.1;
+}
+
+.hero-b .hero-title em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.hero-b .hero-right img {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.hero-mini-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.hero-mini-stats strong {
+  display: block;
+  font-size: 2rem;
+}
+
+/* =====================================================
+   PORTFOLIO A - Bento moderne
+===================================================== */
+
+.portfolio-a {
+  padding: 120px 0;
+}
+
+.portfolio-bento {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-auto-rows: 220px;
+  gap: 20px;
+}
+
+.bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.bento-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bento-card__info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1.5rem;
+  color: white;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75),
+    transparent
+  );
+}
+
+.bento-card-1 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.bento-card-2 {
+  grid-column: span 2;
+}
+
+.bento-card-3,
+.bento-card-4,
+.bento-card-5 {
+  grid-column: span 1;
+}
+
+/* =====================================================
+   PORTFOLIO B - Magazine / Masonry
+===================================================== */
+
+.portfolio-b {
+  padding: 120px 0;
+  background: #fafafa;
+}
+
+.portfolio-magazine {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2rem;
+}
+
+.pb-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  transition: 0.3s;
+}
+
+.pb-card:hover {
+  transform: translateY(-8px);
+}
+
+.pb-card__img-wrap img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.pb-card__body {
+  padding: 1.5rem;
+}
+
+.pb-card__tag {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.pb-card__title {
+  margin-top: .5rem;
+}
+
+.pb-card__footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+/* =====================================================
+   FOOTER A - CTA Premium
+===================================================== */
+
+.footer-a {
+  background: var(--theme-dark);
+  color: white;
+  text-align: center;
+  padding: 120px 0;
+}
+
+.footer-a h2 {
+  font-size: 4rem;
+  max-width: 700px;
+  margin: auto;
+}
+
+.footer-a p {
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+.footer-main {
+  background: #050505;
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+/* =====================================================
+   FOOTER B - Corporate
+===================================================== */
+
+.footer-b {
+  background: #111827;
+  color: white;
+  padding: 80px 0 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+}
+
+.footer-grid h3,
+.footer-grid h4 {
+  margin-bottom: 1rem;
+}
+
+.footer-bottom {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,.1);
+  text-align: center;
+}
+
+/* =====================================================
+   Boutons
+===================================================== */
+
+.btn-primary {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  display: inline-block;
+  border: 1px solid white;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+/* =====================================================
+   Responsive
+===================================================== */
+
+@media (max-width: 992px) {
+
+  .hero-b .hero-grid,
+  .footer-grid,
+  .portfolio-magazine {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-bento {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .hero-a .hero-title,
+  .hero-b .hero-title,
+  .footer-a h2 {
+    font-size: 2.5rem;
+  }
+}
