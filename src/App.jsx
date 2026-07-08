@@ -5,6 +5,7 @@ import SectorQuestions from './components/SectorQuestions'
 import { collection, addDoc, serverTimestamp , doc, updateDoc, increment } from 'firebase/firestore'
 import { db } from './firebase'
 import { useAuth } from './contexts/AuthContext'
+import { useCredits } from './hooks/useCredits'
 
 // ─── HELPER — Sauvegarde d'un site dans Firestore ──────────
 async function saveSiteToFirestore({ userId, formData, htmlSnapshot, layout, palette, preferences }) {
@@ -497,6 +498,7 @@ function rebuildHtml(fullHtml, sectionName, newSectionHtml) {
 export default function App() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const { credits, consumeCredit } = useCredits()
 
   const [formData, setFormData] = useState({ 
     nom: '', secteur: '', services: '', 
@@ -638,6 +640,12 @@ if (aiAnswers) {
 
   // ─── GÉNÉRATION + SAUVEGARDE FIRESTORE ───────────────────
   const generateSite = async (additionalAnswers = {}) => {
+    const creditOk = await consumeCredit()
+    if (!creditOk) {
+      // consumeCredit() retourne false si credits <= 0 ou erreur Firestore
+      navigate('/pricing')
+      return
+     }
     setLoading(true)
     setLoadingStep('Analyse de vos informations...')
     setGeneratedLayout(null)

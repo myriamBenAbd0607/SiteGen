@@ -1,17 +1,20 @@
 // ═══════════════════════════════════════════════════════════
-// MAIN.JSX — mis à jour avec WelcomePage + AppLayout
+// MAIN.JSX — avec système de crédits
 // ═══════════════════════════════════════════════════════════
 import React                          from 'react'
 import ReactDOM                       from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth }      from './contexts/AuthContext'
+import { useCredits }                 from './hooks/useCredits'
 
 import LandingPage  from './pages/LandingPage'
 import AuthPage     from './pages/AuthPage'
 import Dashboard    from './pages/Dashboard'
-import WelcomePage  from './pages/WelcomePage'   // ← nouvelle page
+import WelcomePage  from './pages/WelcomePage'
+import PricingPage  from './pages/PricingPage'
+import CheckoutPage from './pages/CheckoutPage'
 import App          from './App'
-import AppLayout    from './AppLayout'            // ← nouveau layout
+import AppLayout    from './AppLayout'
 
 import './index.css'
 
@@ -28,44 +31,74 @@ function GlobalLoader() {
   )
 }
 
-// ─── Route protégée avec AppLayout (sidebar) ─────────────
+// ─── Route protégée — vérifie l'authentification ─────────
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth()
   if (loading) return <GlobalLoader />
   if (!user)   return <Navigate to="/auth" replace />
-  return (
-    <AppLayout>
-      {children}
-    </AppLayout>
-  )
+  return <AppLayout>{children}</AppLayout>
 }
 
-// ─── Route publique (redirige si connecté) ────────────────
+// ─── Route publique — redirige si déjà connecté ──────────
 function PublicRoute({ children }) {
   const { user, loading } = useAuth()
   if (loading) return <GlobalLoader />
   return user ? <Navigate to="/welcome" replace /> : children
 }
 
+// ─── Credit Guard — bloque /generate si 0 crédits ────────
+// Doit être à l'intérieur de ProtectedRoute (user garanti connecté).
+// Pendant le chargement des crédits : affiche le GlobalLoader.
+// Si 0 crédits : redirige vers /pricing avec un message explicatif.
+// Sinon : laisse passer.
+function CreditGuard({ children }) {
+  const { credits, loading } = useCredits()
+
+  // Toujours attendre que les crédits soient chargés avant de décider
+  if (loading || credits === null) return <GlobalLoader />
+
+  if (credits <= 0) {
+    return <Navigate to="/pricing" replace state={{ reason: 'no_credits' }} />
+  }
+
+  return children
+}
+
 // ─── Router ───────────────────────────────────────────────
 function Router() {
   return (
     <Routes>
-      {/* Publiques */}
-      <Route path="/"    element={<LandingPage />} />
+      {/* ── Publiques ───────────────────────────────────── */}
+      <Route path="/" element={<LandingPage />} />
       <Route path="/auth" element={
         <PublicRoute><AuthPage /></PublicRoute>
       } />
 
-      {/* Protégées — toutes dans AppLayout (sidebar) */}
+      {/* ── Protégées (AppLayout + auth requise) ─────────── */}
       <Route path="/welcome" element={
         <ProtectedRoute><WelcomePage /></ProtectedRoute>
       } />
       <Route path="/dashboard" element={
         <ProtectedRoute><Dashboard /></ProtectedRoute>
       } />
+
+      {/* Génération — nécessite auth ET au moins 1 crédit */}
       <Route path="/generate" element={
-        <ProtectedRoute><App /></ProtectedRoute>
+        <ProtectedRoute>
+          <CreditGuard>
+            <App />
+          </CreditGuard>
+        </ProtectedRoute>
+      } />
+
+      {/* Tarifs — protégé pour afficher le solde de l'utilisateur */}
+      <Route path="/pricing" element={
+        <ProtectedRoute><PricingPage /></ProtectedRoute>
+      } />
+
+      {/* Checkout — protégé, reçoit le pack via location.state */}
+      <Route path="/checkout" element={
+        <ProtectedRoute><CheckoutPage /></ProtectedRoute>
       } />
 
       {/* Fallback */}

@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-// APP LAYOUT — Sidebar style Wix AI : blanc, épuré
+// APP LAYOUT — Sidebar avec widget crédits
 // src/AppLayout.jsx
 // ═══════════════════════════════════════════════════════════
 import { useState, useEffect } from 'react'
@@ -8,13 +8,14 @@ import { signOut } from 'firebase/auth'
 import { collection, query, where, onSnapshot, Timestamp } from 'firebase/firestore'
 import { auth, db } from './firebase'
 import { useAuth } from './contexts/AuthContext'
+import { useCredits } from './hooks/useCredits'
 
 function timeAgo(ts) {
   if (!ts) return ''
   const date = ts instanceof Timestamp ? ts.toDate() : new Date(ts)
   const diff  = Date.now() - date.getTime()
   const mins  = Math.floor(diff / 60000)
-  if (mins < 1)  return 'À l\'instant'
+  if (mins < 1)  return "À l'instant"
   if (mins < 60) return `il y a ${mins}m`
   const hrs = Math.floor(mins / 60)
   if (hrs < 24)  return `il y a ${hrs}h`
@@ -23,8 +24,17 @@ function timeAgo(ts) {
 
 const SECTOR_ICONS = {
   'Coiffure & beauté': '💇‍♀️', 'Restaurant & café': '🍽️',
-  'Médecin & santé': '🏥', 'Artisan & réparation': '🔧',
+  'Médecin & santé': '🏥',    'Artisan & réparation': '🔧',
   'Commerce & épicerie': '🛒', 'Autre': '🎯',
+}
+
+// Couleur du widget crédit selon le solde
+function getCreditColor(n) {
+  if (n === null || n === undefined) return '#7c3aed'
+  if (n === 0)  return '#dc2626'
+  if (n <= 2)   return '#d97706'
+  if (n <= 5)   return '#7c3aed'
+  return '#059669'
 }
 
 export default function AppLayout({ children }) {
@@ -33,6 +43,14 @@ export default function AppLayout({ children }) {
   const location    = useLocation()
   const [sites, setSites]         = useState([])
   const [collapsed, setCollapsed] = useState(false)
+
+  // ─── Crédits en temps réel ──────────────────────────────
+  const { credits, creditsUsed, loading: creditsLoading } = useCredits()
+  const creditCol     = getCreditColor(credits)
+  const creditsTotal  = (credits ?? 0) + (creditsUsed ?? 0)
+  const creditPct     = creditsTotal > 0
+    ? Math.min((credits / creditsTotal) * 100, 100)
+    : 0
 
   useEffect(() => {
     if (!user?.uid) return
@@ -50,7 +68,6 @@ export default function AppLayout({ children }) {
   }, [user?.uid])
 
   const handleLogout = async () => { await signOut(auth); navigate('/', { replace: true }) }
-
   const isActive = (path) => location.pathname === path
 
   const navItem = (path, icon, label) => (
@@ -79,9 +96,9 @@ export default function AppLayout({ children }) {
       fontFamily: "'Inter', -apple-system, sans-serif",
       background: '#f9fafb',
     }}>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
 
-      {/* ══ SIDEBAR ══ */}
+      {/* ══ SIDEBAR ══════════════════════════════════════════ */}
       <aside style={{
         width: collapsed ? '60px' : '232px',
         flexShrink: 0, transition: 'width 0.2s ease',
@@ -91,7 +108,7 @@ export default function AppLayout({ children }) {
         overflowX: 'hidden',
       }}>
 
-        {/* Logo */}
+        {/* ── Logo ─────────────────────────────────────────── */}
         <div style={{
           padding: collapsed ? '16px 0' : '16px 16px',
           display: 'flex', alignItems: 'center',
@@ -125,9 +142,8 @@ export default function AppLayout({ children }) {
           }}>‹</button>
         </div>
 
-        {/* Nav principal */}
+        {/* ── Nav principal ─────────────────────────────────── */}
         <div style={{ padding: '12px 8px', borderBottom: '1.5px solid #f3f4f6' }}>
-          {/* Bouton Nouveau site */}
           <button onClick={() => navigate('/generate')} style={{
             width: '100%', display: 'flex', alignItems: 'center',
             gap: collapsed ? 0 : '8px',
@@ -144,15 +160,96 @@ export default function AppLayout({ children }) {
             {!collapsed && <span>Nouveau site</span>}
           </button>
 
-          {navItem('/welcome', '⌂', 'Accueil')}
+          {navItem('/welcome',   '⌂', 'Accueil')}
           {navItem('/dashboard', '▤', 'Mes sites')}
+          {navItem('/pricing',   '⚡', 'Crédits')}
         </div>
 
-        {/* Récents */}
+        {/* ── Widget crédits ────────────────────────────────── */}
+        {!creditsLoading && credits !== null && (
+          <div style={{ padding: '10px 8px', borderBottom: '1.5px solid #f3f4f6' }}>
+            {!collapsed ? (
+              /* Version déployée */
+              <div style={{
+                padding: '12px',
+                background: '#fafafa',
+                borderRadius: '10px',
+                border: '1px solid #f3f4f6',
+              }}>
+                {/* En-tête */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '11px', fontWeight: '600', color: '#6b7280' }}>
+                    Crédits
+                  </span>
+                  <span style={{ fontSize: '13px', fontWeight: '800', color: creditCol, fontFamily: 'inherit' }}>
+                    {credits}
+                  </span>
+                </div>
+
+                {/* Barre de progression */}
+                <div style={{
+                  height: '4px', background: '#f3f4f6',
+                  borderRadius: '4px', marginBottom: '10px',
+                  overflow: 'hidden',
+                }}>
+                  <div style={{
+                    height: '100%',
+                    background: creditCol,
+                    borderRadius: '4px',
+                    width: `${creditPct}%`,
+                    transition: 'width 0.4s ease',
+                  }} />
+                </div>
+
+                {/* CTA ou label */}
+                {credits <= 2 ? (
+                  <button
+                    onClick={() => navigate('/pricing')}
+                    style={{
+                      width: '100%', padding: '7px', borderRadius: '7px',
+                      background: '#7c3aed', color: 'white',
+                      border: 'none', cursor: 'pointer',
+                      fontSize: '11px', fontWeight: '700',
+                      fontFamily: 'inherit', transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = '#6d28d9'}
+                    onMouseLeave={e => e.currentTarget.style.background = '#7c3aed'}
+                  >
+                    {credits === 0 ? '⚠ Plus de crédits' : '⚡ Recharger les crédits'}
+                  </button>
+                ) : (
+                  <p style={{ fontSize: '10px', color: '#9ca3af', margin: 0, textAlign: 'center' }}>
+                    {credits} crédit{credits > 1 ? 's' : ''} disponible{credits > 1 ? 's' : ''}
+                  </p>
+                )}
+              </div>
+            ) : (
+              /* Version réduite — juste un badge numéroté */
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div
+                  title={`${credits} crédit${credits > 1 ? 's' : ''}`}
+                  style={{
+                    width: '26px', height: '26px', borderRadius: '8px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '10px', fontWeight: '800', cursor: 'pointer',
+                    color: creditCol,
+                    background: credits === 0 ? '#fee2e2' : credits <= 2 ? '#fffbeb' : '#f5f3ff',
+                    border: `1.5px solid ${creditCol}30`,
+                  }}
+                  onClick={() => navigate('/pricing')}
+                >
+                  {credits}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── Récents ───────────────────────────────────────── */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '12px 8px' }}>
           {!collapsed && sites.length > 0 && (
             <p style={{
-              fontSize: '10px', fontWeight: '700', color: '#4f6689ff',
+              fontSize: '10px', fontWeight: '700', color: '#4f6689',
               letterSpacing: '1px', textTransform: 'uppercase',
               padding: '0 4px', marginBottom: '8px',
             }}>Récents · {sites.length}</p>
@@ -181,7 +278,10 @@ export default function AppLayout({ children }) {
               </div>
               {!collapsed && (
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: '12px', fontWeight: '500', color: '#111827', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <p style={{
+                    fontSize: '12px', fontWeight: '500', color: '#111827',
+                    margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                  }}>
                     {site.nom}
                   </p>
                   <p style={{ fontSize: '10px', color: '#9ca3af', margin: 0 }}>
@@ -193,7 +293,7 @@ export default function AppLayout({ children }) {
           ))}
         </div>
 
-        {/* Profil */}
+        {/* ── Profil + déconnexion ──────────────────────────── */}
         <div style={{
           padding: collapsed ? '12px 8px' : '12px',
           borderTop: '1.5px solid #f3f4f6',
@@ -213,15 +313,22 @@ export default function AppLayout({ children }) {
                 {user?.displayName?.[0]?.toUpperCase() || '?'}
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontSize: '12px', fontWeight: '600', color: '#111827', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <p style={{
+                  fontSize: '12px', fontWeight: '600', color: '#111827',
+                  margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                }}>
                   {user?.displayName || 'Utilisateur'}
                 </p>
-                <p style={{ fontSize: '10px', color: '#9ca3af', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <p style={{
+                  fontSize: '10px', color: '#9ca3af', margin: 0,
+                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                }}>
                   {user?.email}
                 </p>
               </div>
             </div>
           )}
+
           <button onClick={handleLogout} style={{
             width: '100%', display: 'flex', alignItems: 'center',
             gap: collapsed ? 0 : '8px',
@@ -241,7 +348,7 @@ export default function AppLayout({ children }) {
         </div>
       </aside>
 
-      {/* ══ CONTENU ══ */}
+      {/* ══ CONTENU PRINCIPAL ════════════════════════════════ */}
       <main style={{ flex: 1, overflowY: 'auto', background: '#fafafa' }}>
         {children}
       </main>
