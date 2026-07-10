@@ -37,7 +37,6 @@ const COMPONENTS_REGISTRY = {
   },
   services: {
     'services-a': { tags: ['grille 3 cols', 'icônes SVG', 'hover lift', 'fond clair'] },
-    'services-b': { tags: ['liste alternée', 'image + texte', 'storytelling'] },
   },
   portfolio: {
     'portfolio-a': { tags: ['bento grid', 'tailles variées', 'overlay hover', 'créatif'] },
@@ -49,7 +48,6 @@ const COMPONENTS_REGISTRY = {
   },
   testimonials: {
     'testimonials-a': { tags: ['3 cards', 'fond clair', 'avatar + étoiles', 'classique'] },
-    'testimonials-b': { tags: ['fond sombre', 'citation large', 'une à la fois', 'luxe'] },
   },
   faq: {
     'faq-a': { tags: ['accordéon', 'texte gauche + liste droite', 'split 2 cols'] },
@@ -1191,7 +1189,7 @@ app.post('/generate', async (req, res) => {
             { role: 'system', content: 'Tu es un expert JSON. Retourne uniquement du JSON valide, sans markdown.' },
             { role: 'user', content: prompt }
           ],
-          max_tokens: 3500, temperature: 0.6
+          max_tokens: 4500, temperature: 0.6
         }),
         signal: groqController.signal
       })
